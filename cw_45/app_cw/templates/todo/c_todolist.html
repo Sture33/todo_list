@@ -1,0 +1,13 @@
+{% extends '../base.html' %}
+
+{% block title %}
+    Completed todos
+{% endblock %}
+
+{% block content %}
+<ol class="list-group list-group-numbered" style="text-align: center;">
+            {% for todo in todos %}
+                <li class="list-group-item" style="display: flex; align-items: center; justify-content: center; grid-gap: 10px"><h5>Name:</h5> {{ todo }}, <h5>Deadline:</h5> {{ todo.deadline.date }} <a href="{% url 'tododetail' todo.pk %}">detail</a></li>
+            {% endfor %}
+        </ol>
+{% endblock %}

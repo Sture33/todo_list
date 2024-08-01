@@ -1,0 +1,33 @@
+{% extends '../base.html' %}
+{% load django_bootstrap5 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% block title %}
+    Todo Create
+{% endblock %}
+
+
+
+{% block content %}{{ todo.deadline|date:'d.m.Y' }}
+    <form method="post">
+        {% csrf_token %}
+         {% bootstrap_form form %}
+{#        <div class="mb-3">#}
+{#            <label for="exampleInputEmail1" class="form-label">Title</label>#}
+{#            <input type="text" class="form-control" id="exampleInputEmail1" value="{{ todo.title }}">#}
+{#        </div>#}
+{#        <div class="form-floating mb-3">#}
+{#            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" >{{ form.description.value }} </textarea>#}
+{#            <label for="floatingTextarea">Description</label>#}
+{#        </div>#}
+{#        <div class="mb-3">#}
+{#            <label for="exampleInputEmail1" class="form-label">Date</label>#}
+{#            <input type="date" class="form-control" id="exampleInputEmail1" value="{{ todo.deadline|date:'d.m.Y' }}">#}
+{#        </div>#}
+{##}
+{#        <button type="submit" class="btn btn-primary">Update</button>#}
+      {% bootstrap_button button_type="submit" content="Submit" %}
+    </form>
+{% endblock %}

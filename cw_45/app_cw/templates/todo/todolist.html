@@ -1,0 +1,35 @@
+{% extends '../base.html' %}
+
+{% block title %}
+    Todo List
+{% endblock %}
+
+{% block content %}
+    <ol class="list-group list-group-numbered" style="text-align: center;">
+        {% for todo in todolist %}
+            <li class="list-group-item" style="display: flex; align-items: center; justify-content: center; grid-gap: 10px"><h5>Name:</h5> {{ todo }}, <h5>Deadline:</h5> {{ todo.deadline.date }}<a href="{% url 'todoupdate' todo.pk %}">update</a> <a href="{% url 'tododetail' todo.pk %}">detail</a>
+
+                <form action="{% url 'tododone' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="pk" value="{{ todo.pk }}">
+                    <input type="submit" value="done" class="btn btn-primary">
+                </form>
+
+            </li>
+        {% endfor %}
+    </ol>
+
+    <nav aria-label="Page navigation example">
+      <ul class="pagination" style="display: flex; align-items: center; grid-gap: 10px">
+          {% if page_obj.has_previous %}
+              <li class="page-item"><a class="btn btn-primary" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+          {% endif %}
+
+          <span>{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+          {% if page_obj.has_next %}
+              <li class="page-item"><a class="btn btn-primary" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+          {% endif %}
+      </ul>
+    </nav>
+{% endblock %}
